@@ -113,6 +113,49 @@ var isValid = function(s) {
 	}
 };
 
+/* Merge Two Sorted Lists
+Merge two sorted lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
+
+Example:
+Input: 1->2->4, 1->3->4
+Output: 1->1->2->3->4->
+
+*/
+/*Definition for singly-linked list.*/
+function ListNode(val) {
+    this.val = val;
+    this.next = null;
+}
+
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(l1, l2) {
+    var result = new ListNode(0);
+    var current = new ListNode(0);
+    result = current;
+    while (l1 != null && l2 != null) {
+    	if (l1.val <= l2.val) {
+    		current.next = new ListNode(l1.val);
+    		l1 = l1.next;
+    	} else {
+    		current.next = new ListNode(l2.val);
+    		l2 = l2.next;
+    	}
+    	current = current.next;
+    }
+ 	if (l1 == null && l2 != null) {
+ 		current.next = l2;
+ 	} else if (l2 == null && l1 != null) {
+ 		current.next = l1;
+ 	}
+ 	console.log(result.next.next.next);
+    return result.next;
+};
+
+
 /*Reverse tests*/
 //console.log(reverse(12345));
 
@@ -130,3 +173,20 @@ var isValid = function(s) {
 //console.log(isValid("(((((((("));
 //console.log(isValid("{}})()(("));
 //console.log(isValid("([{}])()[[]]"));
+
+/*merge two lists tests*/
+var a1 = new ListNode(1);
+var b1 = new ListNode(4);
+//var c1 = new ListNode(6);
+
+var x2 = new ListNode(1);
+var y2 = new ListNode(3);
+//var z2 = new ListNode(5);
+
+a1.next = b1;
+//b1.next = c1;
+
+x2.next = y2;
+//y2.next = z2; 
+
+console.log(mergeTwoLists(a1, x2));
