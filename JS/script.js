@@ -156,17 +156,54 @@ var mergeTwoLists = function(l1, l2) {
 };
 
 
+var removeDuplicates = function(nums) {
+	var firstIndex = 0;
+	var deleteCount = 0;
+	for (i = 0; i < nums.length; i++) {
+		if (nums[i] == nums[i+1]) {
+			deleteCount++;
+		} if (deleteCount) {
+			nums.splice(firstIndex, deleteCount, nums[i]);
+			i -= (deleteCount);
+			firstIndex = i+1;
+			deleteCount = 0;
+		} else {
+			deleteCount = 0;
+			firstIndex = i+1;
+		}
+	}
+	return nums.length;
+}
+
+
+var removeDuplicates2 = function(nums) {
+	var firstIndex = 0;
+	var length = 0;
+	for (i = 0; i < nums.length; i++) {
+		if (!(nums[i] == nums[i+1])) {
+            firstIndex++;
+            nums[firstIndex] = nums[i+1];
+            length++;
+		}
+	}
+	nums.splice(firstIndex, nums.length-length);
+	return length;
+}
+
 /*Reverse tests*/
 //console.log(reverse(12345));
+
 
 /*RomanToInt tests*/
 //console.log(romanToInt("XII"));
 //console.log(romanToInt("IX"));
 //console.log(romanToInt("MCMXCIV"));
 
+
 /*LongestCommonPrefix tests*/
 //console.log(LongestCommonPrefix([]));
 //console.log(LongestCommonPrefix(["cat", "car", "cart"]));
+
 
 /*isValid tests*/
 //console.log(isValid("()[]()(){}][{}"));
@@ -174,19 +211,27 @@ var mergeTwoLists = function(l1, l2) {
 //console.log(isValid("{}})()(("));
 //console.log(isValid("([{}])()[[]]"));
 
+
 /*merge two lists tests*/
-var a1 = new ListNode(1);
-var b1 = new ListNode(4);
+//var a1 = new ListNode(1);
+//var b1 = new ListNode(4);
 //var c1 = new ListNode(6);
 
-var x2 = new ListNode(1);
-var y2 = new ListNode(3);
+//var x2 = new ListNode(1);
+//var y2 = new ListNode(3);
 //var z2 = new ListNode(5);
 
-a1.next = b1;
+//a1.next = b1;
 //b1.next = c1;
 
-x2.next = y2;
+//x2.next = y2;
 //y2.next = z2; 
 
-console.log(mergeTwoLists(a1, x2));
+//console.log(mergeTwoLists(a1, x2));
+
+/*Remove duplicates test*/
+var numbers = [1, 2, 2, 3, 4, 4, 4, 4, 4, 8, 8, 10, 10, 24, 24, 290, 290];
+//var numbers = [1, 2, 2, 3, 3, 3, 3, 3, 4, 5, 6, 6, 8, 9, 10];
+console.log(removeDuplicates2(numbers));
+//console.log(removeDuplicates([]));
+console.log(numbers);
